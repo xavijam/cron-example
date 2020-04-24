@@ -1,7 +1,7 @@
 name: CI
 on:
   schedule:
-    - cron:  '*/15 * * * *'
+    - cron:  '*/3 * * * *'
 
 jobs:
   build:
@@ -10,14 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: Echo TOKEN
-      run: echo "$TOKEN"
-      env:
-        TOKEN: ${{ secrets.TOKEN }}
-      
     - name: Upload new cases data
       uses: wei/curl@master
       with:
-        args: -X POST 'https://api.tinybird.co/v0/datasources?url=https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos_long.csv&mode=replace&name=ccaa_covid19_casos_long&token=$TOKEN'
+        args: -X POST "https://api.tinybird.co/v0/datasources?url=https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos_long.csv&mode=replace&name=ccaa_covid19_casos_long&token=$TINYBIRD_TOKEN"
       env:
-        TOKEN: ${{ secrets.TOKEN }}
+        TINYBIRD_TOKEN: ${{ secrets.TOKEN }}
