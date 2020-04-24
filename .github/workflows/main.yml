@@ -16,4 +16,4 @@ jobs:
     - name: Upload new cases data
       uses: wei/curl@master
       with:
-        args: -X POST "https://api.tinybird.co/v0/datasources?url=https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos_long.csv&mode=replace&name=ccaa_covid19_casos_long&token=${{ secrets.TOKEN }}"
+        args: -X POST 'https://api.tinybird.co/v0/datasources?url=https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos_long.csv&mode=replace&name=ccaa_covid19_casos_long&token=${{ secrets.TOKEN }}'
