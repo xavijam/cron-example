@@ -1,7 +1,7 @@
 name: CI
 on:
   schedule:
-    - cron:  '*/15 * * * *'
+    - cron:  '*/2 * * * *'
 
 jobs:
   build:
@@ -9,11 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
 
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    - name: Update cases Data Source
+      run: curl -H "Authorization: Bearer $TOKEN" -X POST "https://api.tinybird.co/v0/datasources?url=https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos_long.csv&mode=replace&name=ccaa_covid19_casos_long"
