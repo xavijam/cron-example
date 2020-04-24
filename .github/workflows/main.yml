@@ -13,7 +13,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: Run a one-line script
+    - name: Echo TOKEN
+      run: echo "$TOKEN"
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
+      
+    - name: Upload new cases data
       uses: wei/curl@master
       with:
         args: -X POST https://api.tinybird.co/v0/datasources?url=https://raw.githubusercontent.com/datadista/datasets/master/COVID%2019/ccaa_covid19_casos_long.csv&mode=replace&name=ccaa_covid19_casos_long&token=$TOKEN
